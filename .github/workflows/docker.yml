@@ -1,0 +1,41 @@
+name: Docker Image CI
+on:
+  push:
+    branches-ignore:
+      - "master"
+jobs:
+  build:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        include:
+          - os: ubuntu-20.04 #ubuntu-latest
+          - os: ubuntu-18.04       
+    steps:
+    # Checkout
+    - uses: actions/checkout@v2
+      with:
+        # Full git history is needed to get a proper list of changed files within `super-linter`
+        fetch-depth: 0 
+    # Verbose     
+    - name: Print full context
+      env:
+        GITHUB_CONTEXT: ${{ toJson(github) }}
+      run: echo "$GITHUB_CONTEXT"
+    - name: Print branch and repository
+      run: echo "Branch = ${GITHUB_REF##*/} | Repository = ${GITHUB_REPOSITORY#*/}" 
+    # Linting
+    - name: Lint Dockerfile
+      uses: github/super-linter@v4
+      env:
+        #VALIDATE_ALL_CODEBASE: false
+        #VALIDATE_DOCKERFILE: true
+        VALIDATE_MARKDOWN: false
+        DEFAULT_BRANCH: ${{ github.ref }}
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    # Build       
+    - name: Build the Docker image
+      run: docker build . --file Dockerfile --tag ${GITHUB_REPOSITORY#*/}:"${GITHUB_REF##*/}"
+    # Inspect
+    - name: Inspect image
+      run: docker image inspect ${GITHUB_REPOSITORY#*/}:"${GITHUB_REF##*/}"
