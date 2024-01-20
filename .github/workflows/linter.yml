@@ -18,3 +18,6 @@ jobs:
           yamllint_file_or_dir: .
           yamllint_strict: true
           yamllint_comment: false
+      - name: 'Hadolint'
+        run: |
+          docker run --rm -i -v .hadolint.yml:/.config/hadolint.yaml hadolint/hadolint < Dockerfile

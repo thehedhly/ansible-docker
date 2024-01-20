@@ -1,0 +1,6 @@
+---
+
+ignored:
+  - DL3008
+# for 'DL3006', see https://github.com/hadolint/hadolint/issues/339
+  - DL3006
