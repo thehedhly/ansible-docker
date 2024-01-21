@@ -1,11 +1,12 @@
-<img src="README-Resources/ansible_logo_icon.png" width="150" height="150" alt="Ansible Logo" />
-
 # ansible-docker
+
 ![Build](https://github.com/thehedhly/ansible-docker/actions/workflows/ci.yml/badge.svg?branch=dev)
 ![Docker build](https://github.com/thehedhly/ansible-docker/actions/workflows/linter.yml/badge.svg?branch=dev)
 
+<img src="README-Resources/ansible_logo_icon.png" width="100" height="100" alt="Ansible Logo" />
+
 ## Features
-- Builds a [python](https://hub.docker.com/_/python) based __ansible__ docker __image__.
+- Builds [python](https://hub.docker.com/_/python) based __ansible-core__ and __ansible community package__ docker __images__.
 
 ## Ansible:
 In accordance with both ansible community projects, __ansible community package__ and __ansible-core__, this project builds two seperate images as follows:
