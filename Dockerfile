@@ -8,10 +8,9 @@ ARG PYCMD="/usr/local/bin/python3.11"
 ARG SYS_ZONEINFO="Europe/Berlin"
 ARG ANSIBLE_HOME="/usr/share/ansible"
 ARG ANSIBLE_GALAXY_CLI_COLLECTION_OPTS="-v"
-ARG ANSIBLE_GALAXY_CLI_ROLE_OPTS=""
-ARG ANSIBLE_INSTALL_REFS=""
+ARG ANSIBLE_GALAXY_CLI_ROLE_OPTS="-v"
+ARG ANSIBLE_INSTALL_REFS="ansible-core"
 # ARG ANSIBLE_INSTALL_REFS="ansible-core==2.16.0"
-# ARG ANSIBLE_INSTALL_REFS="ansible-core"
 # ARG ANSIBLE_INSTALL_REFS="ansible==9"
 # ARG ANSIBLE_INSTALL_REFS="ansible"
 ARG ANSIBLE_USER="thehedhly"
@@ -39,16 +38,9 @@ RUN ansible-galaxy role install "$ANSIBLE_GALAXY_CLI_ROLE_OPTS" -r requirements.
 
 # Final build stage
 FROM base as final
-# LABEL org.opencontainers.image.created="date and time on which the image was built (string, date-time as defined by RFC 3339)"
-# LABEL org.opencontainers.image.authors="https://github.com/thehedhly"
-# LABEL org.opencontainers.image.url="https://hub.docker.com/repository/docker/thehedhly/ansible"
-# LABEL org.opencontainers.image.source="https://github.com/thehedhly/ansible-docker"
-# TODO Update according to ANSIBLE_INSTALL_REFS
-# LABEL org.opencontainers.image.version="2.16.0"
 ARG ANSIBLE_HOME
 ARG ANSIBLE_USER
 ENV ANSIBLE_CONFIG "/home/$ANSIBLE_USER/.ansible.cfg"
-# ENV ANSIBLE_HOME = $XANSIBLE_HOME
 
 COPY --from=galaxy $ANSIBLE_HOME $ANSIBLE_HOME
 
