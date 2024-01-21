@@ -47,6 +47,6 @@ jobs:
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
           build-args: |
-            ANSIBLE_INSTALL_REFS=${{ matrix.data.version == '' && matrix.data.package || format('{0}={1}',matrix.data.package,matrix.data.version) }}
+            ANSIBLE_INSTALL_REFS=${{ matrix.data.version == '' && matrix.data.package || format('{0}=={1}',matrix.data.package,matrix.data.version) }}
 
 # ANSIBLE_INSTALL_REFS=${{ matrix.data.package }}==${{ matrix.data.version }}
