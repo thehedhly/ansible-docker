@@ -2,18 +2,22 @@
 
 name: ci
 on:
+  workflow_dispatch:
   push:
-    # branches:
-    #   - main
+  #   branches:
+  #     - main
+  # pull_request:
+  #   branches:
+  #     - 'main'
 
 jobs:
   build:
     strategy:
       matrix:
         data:
-          # - package: ansible-core
-          # - package: ansible-core
-          #   version: 2.16
+          - package: ansible-core
+          - package: ansible-core
+            version: 2.16
           - package: ansible
           - package: ansible
             version: 9
@@ -37,13 +41,13 @@ jobs:
           images: thehedhly/${{ matrix.data.package }}
           labels: |
             org.opencontainers.image.version=${{ matrix.data.version }}
+            org.opencontainers.image.description=A minimal ${{ matrix.data.package }} image for efficient infrastructure as code
           tags: |
             type=raw,value=${{ matrix.data.version == '' && 'latest' || matrix.data.version }}
       - name: 'Build and push'
         uses: docker/build-push-action@v5
         with:
           push: true
-          # tags: thehedhly/ansible:latest
           context: .
           file: Dockerfile
           tags: ${{ steps.meta.outputs.tags }}

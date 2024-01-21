@@ -1,7 +1,9 @@
 ---
 
-name: Lint Code Base
+name: lint
+run-name: Lint Code Base 
 on:
+  workflow_dispatch:
   push:
     branches-ignore: [main]
   pull_request:
