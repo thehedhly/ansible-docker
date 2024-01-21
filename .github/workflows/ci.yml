@@ -8,6 +8,11 @@ on:
 
 jobs:
   build:
+    strategy:
+      matrix:
+        data:
+          - package: ansible-core
+            version: 2.16
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -28,7 +33,7 @@ jobs:
         id: meta
         uses: docker/metadata-action@v5
         with:
-          images: thehedhly/ansible
+          images: thehedhly/${{ matrix.data.package }}
       - name: 'Build and push'
         uses: docker/build-push-action@v5
         with:
@@ -38,5 +43,7 @@ jobs:
           file: Dockerfile
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
+          build-args: |
+            ANSIBLE_INSTALL_REFS=${{ matrix.data.package }}==${{ matrix.data.version }}
           # labels:
           #   - "$BUILD_TIME"
