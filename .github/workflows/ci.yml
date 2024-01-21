@@ -12,6 +12,7 @@ jobs:
       matrix:
         data:
           - package: ansible-core
+          - package: ansible-core
             version: 2.16
     runs-on: ubuntu-latest
     steps:
@@ -34,6 +35,8 @@ jobs:
         uses: docker/metadata-action@v5
         with:
           images: thehedhly/${{ matrix.data.package }}
+          labels: |
+            org.opencontainers.image.version=${{ matrix.data.version }}
       - name: 'Build and push'
         uses: docker/build-push-action@v5
         with:
@@ -44,6 +47,6 @@ jobs:
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
           build-args: |
-            ANSIBLE_INSTALL_REFS=${{ matrix.data.package }}==${{ matrix.data.version }}
-          # labels:
-          #   - "$BUILD_TIME"
+            ANSIBLE_INSTALL_REFS=${{ matrix.data.version == '' && matrix.data.package || format('{0}={1}',matrix.data.package,matrix.data.version) }}
+
+# ANSIBLE_INSTALL_REFS=${{ matrix.data.package }}==${{ matrix.data.version }}
