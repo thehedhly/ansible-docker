@@ -17,7 +17,6 @@ ARG ANSIBLE_USER="thehedhly"
 
 # Base build stage
 FROM $BASE_IMAGE as base
-# USER root
 ARG BASE_IMAGE
 ARG PYCMD
 ARG ANSIBLE_INSTALL_REFS
@@ -26,7 +25,6 @@ RUN unlink /etc/localtime \
     && ln -s "/usr/share/zoneinfo/$SYS_ZONEINFO" /etc/localtime \
     && "$PYCMD" -m ensurepip \
     && "$PYCMD" -m pip install --no-cache-dir "$ANSIBLE_INSTALL_REFS"
-# USER guest
 
 # Galaxy build stage
 FROM base as galaxy
@@ -40,11 +38,12 @@ RUN ansible-galaxy role install "$ANSIBLE_GALAXY_CLI_ROLE_OPTS" -r requirements.
 
 # Final build stage
 FROM base as final
-LABEL org.opencontainers.image.created="date and time on which the image was built (string, date-time as defined by RFC 3339)"
-LABEL org.opencontainers.image.authors="https://github.com/thehedhly"
-LABEL org.opencontainers.image.url="dockerhub url"
-LABEL org.opencontainers.image.source="github repository"
-LABEL org.opencontainers.image.version="version of the packaged software"
+# LABEL org.opencontainers.image.created="date and time on which the image was built (string, date-time as defined by RFC 3339)"
+# LABEL org.opencontainers.image.authors="https://github.com/thehedhly"
+# LABEL org.opencontainers.image.url="https://hub.docker.com/repository/docker/thehedhly/ansible"
+# LABEL org.opencontainers.image.source="https://github.com/thehedhly/ansible-docker"
+# TODO Update according to ANSIBLE_INSTALL_REFS
+# LABEL org.opencontainers.image.version="2.16.0"
 ARG ANSIBLE_HOME
 ARG ANSIBLE_USER
 ENV ANSIBLE_CONFIG "/home/$ANSIBLE_USER/.ansible.cfg"
