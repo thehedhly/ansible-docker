@@ -1,0 +1,25 @@
+---
+
+name: lint
+run-name: Lint code base
+on:
+  workflow_dispatch:
+  push:
+    branches-ignore: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: 'Yamllint'
+        uses: karancode/yamllint-github-action@master
+        with:
+          yamllint_file_or_dir: .
+          yamllint_strict: true
+          yamllint_comment: false
+      - name: 'Hadolint'
+        run: |
+          docker run --rm -i -v $(pwd)/.hadolint.yml:/.config/hadolint.yaml hadolint/hadolint < Dockerfile
