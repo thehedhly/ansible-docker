@@ -2,14 +2,14 @@
 
 roles: []
 # roles:
-  # - name: geerlingguy.go
-  #   version: "1.1.0"
+#   - name: geerlingguy.go
+#     version: "1.1.0"
 
-# collections: []
-collections:
-  - name: ansible.posix
-    version: ">=1.5.0"
-  - name: community.general
-    version: ">=8.1.0"
-  - name: community.docker
-    version: ">=3.5.0"
+collections: []
+# collections:
+  # - name: ansible.posix
+  #   version: ">=1.5.0"
+  # - name: community.general
+  #   version: ">=8.1.0"
+  # - name: community.docker
+  #   version: ">=3.5.0"

@@ -11,9 +11,12 @@ jobs:
     strategy:
       matrix:
         data:
-          - package: ansible-core
-          - package: ansible-core
-            version: 2.16
+          # - package: ansible-core
+          # - package: ansible-core
+          #   version: 2.16
+          - package: ansible
+          - package: ansible
+            version: 9
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -27,9 +30,6 @@ jobs:
         with:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
-      # - name: 'GetBuildTime'
-      #   run: |
-      #     echo "NOW=$(TZ='Europe/Berlin' date --rfc-3339=seconds)" >> $BUILD_TIME
       - name: 'Set Docker meta'
         id: meta
         uses: docker/metadata-action@v5
@@ -50,5 +50,3 @@ jobs:
           labels: ${{ steps.meta.outputs.labels }}
           build-args: |
             ANSIBLE_INSTALL_REFS=${{ matrix.data.version == '' && matrix.data.package || format('{0}=={1}',matrix.data.package,matrix.data.version) }}
-
-# ANSIBLE_INSTALL_REFS=${{ matrix.data.package }}==${{ matrix.data.version }}
