@@ -1,6 +1,7 @@
 ---
 
 name: ci
+run-name: Build & push docker images
 on:
   workflow_dispatch:
   push:

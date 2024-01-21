@@ -1,7 +1,7 @@
 ---
 
 name: lint
-run-name: Lint Code Base 
+run-name: Lint code base
 on:
   workflow_dispatch:
   push:
