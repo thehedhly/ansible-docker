@@ -41,7 +41,7 @@ jobs:
         with:
           images: thehedhly/${{ matrix.data.package }}
           labels: |
-            org.opencontainers.image.version=${{ matrix.data.version }}
+            org.opencontainers.image.version=${{ matrix.data.version == '' && 'latest' || matrix.data.version }}
             org.opencontainers.image.description=A minimal ${{ matrix.data.package }} image for efficient infrastructure as code
           tags: |
             type=raw,value=${{ matrix.data.version == '' && 'latest' || matrix.data.version }}
