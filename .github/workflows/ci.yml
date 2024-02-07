@@ -10,9 +10,9 @@ on:
   pull_request:
     branches:
       - 'main'
-  # Weekly, at 00:30 on Sunday
+  # Daily, at 00:30
   schedule:
-    - cron: '30 0 * * 0'
+    - cron: '30 0 * * *'
 
 jobs:
   build:
