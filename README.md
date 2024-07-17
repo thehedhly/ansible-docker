@@ -13,8 +13,8 @@ In accordance with both ansible community projects, __ansible community package_
 
 | Ansible project | Supported versions | DockerHub Image |
 |-----------------|----------|-------|
-| ansible community package | <ul><li>9.0</li></ul> | [thehedhly/ansible](https://hub.docker.com/repository/docker/thehedhly/ansible) |
-| ansible-core | <ul><li>2.16</li></ul> | [thehedhly/ansible-core](https://hub.docker.com/repository/docker/thehedhly/ansible-core) |
+| ansible community package | <ul><li>9.0</li><li>10.0</li></ul> | [thehedhly/ansible](https://hub.docker.com/repository/docker/thehedhly/ansible) |
+| ansible-core | <ul><li>2.16</li><li>2.17</li></ul> | [thehedhly/ansible-core](https://hub.docker.com/repository/docker/thehedhly/ansible-core) |
 
 ## Build arguments
 | Name | description | default |
