@@ -10,6 +10,7 @@ on:
   pull_request:
     branches:
       - 'main'
+      - 'dev'
   # Daily, at 00:30
   schedule:
     - cron: '30 0 * * *'
