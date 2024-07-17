@@ -22,9 +22,13 @@ jobs:
           - package: ansible-core
           - package: ansible-core
             version: 2.16
+          - package: ansible-core
+            version: 2.17
           - package: ansible
           - package: ansible
             version: 9
+          - package: ansible
+            version: 10
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
