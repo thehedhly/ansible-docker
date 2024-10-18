@@ -2,8 +2,10 @@
 #   - https://docs.ansible.com/ansible/latest/reference_appendices/release_and_maintenance.html#ansible-core-support-matrix
 #   and also maybe (in case want to install ansible community):
 #   - https://docs.ansible.com/ansible/latest/reference_appendices/release_and_maintenance.html#ansible-community-changelogs
+#   and ansible/python compatibility:
+#   - https://endoflife.date/ansible#compatibility
 #
-ARG BASE_IMAGE="python:3.11.7-slim"
+ARG BASE_IMAGE="python:3.12.7-slim"
 ARG PYCMD="/usr/local/bin/python3.11"
 ARG SYS_ZONEINFO="Europe/Berlin"
 ARG ANSIBLE_HOME="/usr/share/ansible"
