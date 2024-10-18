@@ -6,7 +6,7 @@
 #   - https://endoflife.date/ansible#compatibility
 #
 ARG BASE_IMAGE="python:3.12.7-slim"
-ARG PYCMD="/usr/local/bin/python3.11"
+ARG PYCMD="/usr/local/bin/python3.12"
 ARG SYS_ZONEINFO="Europe/Berlin"
 ARG ANSIBLE_HOME="/usr/share/ansible"
 ARG ANSIBLE_GALAXY_CLI_COLLECTION_OPTS="-v"
