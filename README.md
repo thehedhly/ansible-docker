@@ -19,7 +19,7 @@ In accordance with both ansible community projects, __ansible community package_
 ## Build arguments
 | Name | description | default |
 |------|---------|---------|
-| `BASE_IMAGE` | Base docker image. | python:3.11.7-slim |
+| `BASE_IMAGE` | Base docker image. | python:3.12.7-slim |
 | `PYCMD` | Python binary location.<br>:information_source: See also `BASE_IMAGE` | /usr/local/bin/python3.11 |
 | `SYS_ZONEINFO` | System time zone. | Europe/Berlin |
 | `ANSIBLE_INSTALL_REFS` | Ansible installation package.<br>You can install a specific version of a ansible community package or ansible-core, e.g.:<br><ul><li>ansible-core==2.16.0</li>or<li>ansible==9</li></ul> | ansible-core |
