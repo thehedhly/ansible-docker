@@ -1,3 +1,5 @@
+---
+
 services:
   ansible-core:
     build:
