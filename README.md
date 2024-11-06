@@ -16,6 +16,31 @@ In accordance with both ansible community projects, __ansible community package_
 | ansible community package | <ul><li>9.0</li><li>10.0</li></ul> | [thehedhly/ansible](https://hub.docker.com/repository/docker/thehedhly/ansible) |
 | ansible-core | <ul><li>2.16</li><li>2.17</li></ul> | [thehedhly/ansible-core](https://hub.docker.com/repository/docker/thehedhly/ansible-core) |
 
+## Usage
+* Build the ansible or ansible-core docker image, run then attach to the container:
+```bash
+docker compose run --build --remove-orphans --rm <ansible|ansible-core>
+```
+* Build the ansible or ansible-core docker image, run command without attaching to the container:
+```bash
+docker compose run --build --remove-orphans --rm <ansible|ansible-core> <command>
+```
+Examples:
+```bash
+# Build ansible image, run and attach to container
+docker compose run --build --remove-orphans --rm ansible
+# or
+# Build ansible-core image, run and attach to container
+docker compose run --build --remove-orphans --rm ansible-core
+# or
+# Build ansible image, run 'ansible --version' command without attaching to the container
+docker compose run --build --remove-orphans --rm ansible ansible --version
+# or
+# Build ansible-core image, run 'ansible --version' command without attaching to the container
+docker compose run --build --remove-orphans --rm ansible-core ansible --version
+```
+To use a specefic ansible or ansible-core version, please see [docker-compose.yml](docker-compose.yml) and [list of supported build arguments](#build-arguments).
+
 ## Build arguments
 | Name | description | default |
 |------|---------|---------|
@@ -27,44 +52,5 @@ In accordance with both ansible community projects, __ansible community package_
 | `ANSIBLE_GALAXY_CLI_COLLECTION_OPTS` | Build's CLI options for installing ansible collection.<br>Check [ansible-galaxy]() cli documentation for more details.| -v |
 | `ANSIBLE_GALAXY_CLI_ROLE_OPTS` | Build's CLI options for installing ansible roles.<br>Check [ansible-galaxy]() cli documentation for more details. | -v |
 | `ANSIBLE_USER` | User to set for ansible image. A home directory is setup for the provided user. The default [ansible configuration file](ansible.cfg) for the user is located in his home driectory. | thehedhly |
-
-
-## Usage
-### Build
-`ansible-core`
-```
-docker build -t ansible-core .
-```
-```
-docker build --build-arg ANSIBLE_INSTALL_REFS=ansible-core==<version> -t ansible-core:<tag> .
-```
-`ansible community package`
-```
-docker build --build-arg ANSIBLE_INSTALL_REFS=ansible -t ansible .
-```
-```
-docker build --build-arg ANSIBLE_INSTALL_REFS=ansible==<version> -t ansible:<tag> .
-```
-#### Run
-`ansible-core`
-```
-docker run --rm -it ansible-core bash
-```
-```
-docker run --rm -it ansible-core:<tag> bash
-```
-```
-docker run --rm -it --mount type=bind,source=/home/<username>/<ansible-project-name>,target=/opt/<ansible-project-name> --mount type=bind,source=/home/<username>/.ssh,target=/home/<username>/.ssh,readonly <ansible-core| ansible-core:<tag>> bash
-```
-`ansible community package`
-```
-docker run --rm -it ansible bash
-```
-```
-docker run --rm -it ansible:<tag> bash
-```
-```
-docker run --rm -it --mount type=bind,source=/home/<username>/<ansible-project-name>,target=/opt/<ansible-project-name> --mount type=bind,source=/home/<username>/.ssh,target=/home/<username>/.ssh,readonly <ansible| ansible:<tag>> bash
-```
 
 This project was created by [H.Hedhly](https://hedhly.com).
