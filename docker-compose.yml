@@ -28,8 +28,8 @@ services:
     #   - ANSIBLE_CONFIG=/opt/my-ansible-project/ansible.cfg # load your own custom ansible.cfg
     tty: true
     volumes:
-    - ssh:/home/${USER}/.ssh:ro
-    # - other:/opt/my-ansible-project:ro
+      - ssh:/home/${USER}/.ssh:ro
+      # - other:/opt/my-ansible-project:ro
 volumes:
   ssh:
     driver: local
