@@ -1,0 +1,45 @@
+---
+
+services:
+  ansible-core:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: final
+      args:
+        ANSIBLE_USER: ${USER}
+        ANSIBLE_INSTALL_REFS: ansible-core
+        # ANSIBLE_INSTALL_REFS: ansible-core==2.17.0
+    command: /bin/bash
+    stdin_open: true
+    tty: true
+  ansible:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: final
+      args:
+        ANSIBLE_USER: ${USER}
+        ANSIBLE_INSTALL_REFS: ansible
+        # ANSIBLE_INSTALL_REFS: ansible==10
+    command: /bin/bash
+    stdin_open: true
+    # environment:
+    #   - ANSIBLE_CONFIG=/opt/my-ansible-project/ansible.cfg # load your own custom ansible.cfg
+    tty: true
+    volumes:
+      - ssh:/home/${USER}/.ssh:ro
+      # - other:/opt/my-ansible-project:ro
+volumes:
+  ssh:
+    driver: local
+    driver_opts:
+      type: none
+      device: ~/.ssh
+      o: bind
+  # other:
+  #   driver: local
+  #   driver_opts:
+  #     type: none
+  #     device: ~/path/to/ansible-project
+  #     o: bind
