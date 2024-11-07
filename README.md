@@ -17,26 +17,30 @@ In accordance with both ansible community projects, __ansible community package_
 | ansible-core | <ul><li>2.16</li><li>2.17</li></ul> | [thehedhly/ansible-core](https://hub.docker.com/repository/docker/thehedhly/ansible-core) |
 
 ## Usage
-* Build the ansible or ansible-core docker image, run then attach to the container:
+### Format
+Build the ansible or ansible-core docker image, run then attach to the container:
 ```bash
 docker compose run --build --remove-orphans --rm <ansible|ansible-core>
 ```
-* Build the ansible or ansible-core docker image, run command without attaching to the container:
+Build the ansible or ansible-core docker image, run command without attaching to the container:
 ```bash
 docker compose run --build --remove-orphans --rm <ansible|ansible-core> <command>
 ```
-Examples:
+### Examples
+Build ansible image, run and attach to container
 ```bash
-# Build ansible image, run and attach to container
 docker compose run --build --remove-orphans --rm ansible
-# or
-# Build ansible-core image, run and attach to container
+```
+Build ansible-core image, run and attach to container
+```bash
 docker compose run --build --remove-orphans --rm ansible-core
-# or
-# Build ansible image, run 'ansible --version' command without attaching to the container
+```
+Build ansible image, run 'ansible --version' command without attaching to the container
+```bash
 docker compose run --build --remove-orphans --rm ansible ansible --version
-# or
-# Build ansible-core image, run 'ansible --version' command without attaching to the container
+```
+Build ansible-core image, run 'ansible --version' command without attaching to the container
+```bash
 docker compose run --build --remove-orphans --rm ansible-core ansible --version
 ```
 To use a specefic ansible or ansible-core version, please see [docker-compose.yml](docker-compose.yml) and [list of supported build arguments](#build-arguments).
